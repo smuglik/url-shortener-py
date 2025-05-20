@@ -2,6 +2,9 @@
 
 version: '3'
 
+vars:
+  SOURCE_FILE: src/main.py
+
 tasks:
   default:
     cmds:
@@ -10,8 +13,14 @@ tasks:
 
   run-dev:
     desc: Run dev server
-    cmd: fastapi dev src/main.py
+    cmd: fastapi dev {{.SOURCE_FILE}}
 
   run-prod:
     desc: Run production server
-    cmd: fastapi run src/main.py
+    cmd: fastapi run {{.SOURCE_FILE}}
+
+  check:
+    cmd: ruff check .
+
+  format:
+    cmd: ruff format .
