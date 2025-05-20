@@ -1,0 +1,17 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  run-dev:
+    desc: Run dev server
+    cmd: fastapi dev src/main.py
+
+  run-prod:
+    desc: Run production server
+    cmd: fastapi run src/main.py
