@@ -1,14 +1,16 @@
 from fastapi import Depends
-from src.adapters.repository.interface import IStorageRepository
+from sqlalchemy.ext.asyncio.session import AsyncSession
+from src.adapters.repository.interface import IAsyncStorageRepository
 from src.application.use_case import UrlShortenerUseCase
-from src.infrastructure.db.memstorage import MemStorageRepository
+from src.infrastructure.db.repo import SqlAlchemyStorage
+from src.infrastructure.db.session import get_db
 
 
-def get_repository() -> IStorageRepository:
+async def get_repository(session: AsyncSession = Depends(get_db)) -> IAsyncStorageRepository:
     """Return relevant storage repository"""
-    return MemStorageRepository()
+    return SqlAlchemyStorage(session=session)
 
 
-def get_service(repo: IStorageRepository = Depends(get_repository)) -> UrlShortenerUseCase:
+async def get_service(repo: IAsyncStorageRepository = Depends(get_repository)) -> UrlShortenerUseCase:
     """Return use case"""
     return UrlShortenerUseCase(repo)

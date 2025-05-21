@@ -5,6 +5,10 @@ version: '3'
 vars:
   SOURCE_FILE: src/main.py
 
+env:
+  POSTGRES_DSN: postgresql+psycopg://secret:secret@localhost:5433/secret
+  DB_ECHO: true
+
 tasks:
   default:
     cmds:
@@ -20,7 +24,25 @@ tasks:
     cmd: fastapi run {{.SOURCE_FILE}}
 
   check:
+    desc: Run linter
     cmd: ruff check .
 
   format:
+    desc: Format project's files
     cmd: ruff format .
+
+  start-db:
+    desc: Start docker compose file
+    cmd: docker compose up -d
+
+  stop-db:
+    desc: Stop docker compose file
+    cmd: docker compose down
+
+  makemigrations:
+    desc: Generate migrations
+    cmd: uv run alembic revision --autogenerate -m {{.CLI_ARGS}}
+
+  migrate:
+    desc: Rollout migrations to HEAD state
+    cmd: uv run alembic upgrade heads
