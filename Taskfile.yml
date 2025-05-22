@@ -21,7 +21,7 @@ tasks:
 
   run-prod:
     desc: Run production server
-    cmd: fastapi run {{.SOURCE_FILE}}
+    cmd: uv run granian --interface asgi {{.SOURCE_FILE}}
 
   check:
     desc: Run linter
