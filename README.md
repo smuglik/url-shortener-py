@@ -32,17 +32,12 @@ A modern, fast, and scalable URL shortening service built with Python, FastAPI, 
 ## Getting Started
 
 1. Clone the repository:
-```bash
-git clone <repository-url>
-cd url-shortener-py
-```
-
 2. Create and activate a virtual environment:
 ```bash
 uv sync
-source .venv/bin/activate  # On Unix/macOS
+source .venv/bin/activate # On Unix/macOS
 # or
-.venv\Scripts\activate  # On Windows
+.venv\Scripts\activate # On Windows
 ```
 
 3. Start the PostgreSQL database:
