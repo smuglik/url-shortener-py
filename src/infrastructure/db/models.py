@@ -16,6 +16,4 @@ class UrlModel(Base):  # noqa: D101
     short_code: Mapped[str] = mapped_column(unique=True, nullable=False)
     created: Mapped[datetime] = mapped_column(default=datetime.now)
 
-    __table_args__ = (
-        Index("idx_urls_short_code", "short_code", postgresql_using="hash"),
-    )
+    __table_args__ = (Index("idx_urls_short_code", "short_code", postgresql_using="hash"),)
