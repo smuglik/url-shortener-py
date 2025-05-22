@@ -46,3 +46,7 @@ tasks:
   migrate:
     desc: Rollout migrations to HEAD state
     cmd: uv run alembic upgrade heads
+
+  build:
+    desc: Build docker container
+    cmd: docker build -t url-shortener .
